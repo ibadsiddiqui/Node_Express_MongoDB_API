@@ -18,7 +18,7 @@ MongoClient.connect(db.url, (err, database) => {
     
     
     database = database.db("example")
-    require('./app/routes')(app, {});
+    require('./app/routes')(app, database);
 
 
     app.listen(port, () => {
