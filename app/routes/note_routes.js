@@ -37,6 +37,24 @@ module.exports = (app, db) => {
         })
     });
 
+    app.put('/notes/:id', (req, res) => {
+        // You'll create your note here
+        const details = {
+            '_id': new ObjectID(req.params.id)
+        };
+        const note = {
+            text: req.body.body,
+            title: req.body.title,
+            author: req.body.author,
+        }
+        db.collection('notes').update(details, note, (err, item) => {
+            if (err) {
+                res.send({ 'error': 'An error has occurred' });
+            } else {
+                res.send(note)
+            }
+        })
+    })
 
     app.delete('/notes/:id', (req, res) => {
         // You'll create your note here
